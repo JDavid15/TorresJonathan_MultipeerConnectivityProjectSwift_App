@@ -21,12 +21,12 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     @IBOutlet weak var gameView: UIView!
     
     //Player Settings
-    var playerOneReady = false
-    var playerTwoReady = false
-    var playerOneChoice = "None"
-    var playerTwoChoice = "None"
-    var playerOneScore = 0
-    var playerTwoScore = 0
+    @objc var playerOneReady = false
+    @objc var playerTwoReady = false
+    @objc var playerOneChoice = "None"
+    @objc var playerTwoChoice = "None"
+    @objc var playerOneScore = 0
+    @objc var playerTwoScore = 0
     
     
     //Gameplay UIElements
@@ -43,22 +43,22 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     
     
     //Gameplay Elements
-    var countdownSeconds = 3
-    var mainTimer = Timer()
-    var miscTimer = Timer()
-    var winner = ""
-    var userExit = false
+    @objc var countdownSeconds = 3
+    @objc var mainTimer = Timer()
+    @objc var miscTimer = Timer()
+    @objc var winner = ""
+    @objc var userExit = false
     
     
     //Connect to other devices
-    var peerID: MCPeerID! // Our Device ID (name) as viwed by other
-    var session: MCSession! //The "Connection" between devices
-    var brower: MCBrowserViewController! //Perbuilt VC that serches for nearby Advertisers
-    var advertiser: MCAdvertiserAssistant! //Helps us easily advertise to nearby browsers
+    @objc var peerID: MCPeerID! // Our Device ID (name) as viwed by other
+    @objc var session: MCSession! //The "Connection" between devices
+    @objc var brower: MCBrowserViewController! //Perbuilt VC that serches for nearby Advertisers
+    @objc var advertiser: MCAdvertiserAssistant! //Helps us easily advertise to nearby browsers
 
     
     //Name fore the Service
-    let serviceID = "john-rps"
+    @objc let serviceID = "john-rps"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,10 +160,10 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     
     
     // Minimum number of peers in a session.
-    public let kMCSessionMinimumNumberOfPeers: Int = 1
+    @objc public let kMCSessionMinimumNumberOfPeers: Int = 1
     
     // Maximum number of peers in a session.
-    public let kMCSessionMaximumNumberOfPeers: Int = 2
+    @objc public let kMCSessionMaximumNumberOfPeers: Int = 2
     
     // Remote peer changed state.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState){
@@ -274,8 +274,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     // Finished receiving a resource from remote peer and saved the content
     // in a temporary location - the app is responsible for moving the file
     // to a permanent location within its sandbox.
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?){
-        
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
     }
     
     
@@ -358,7 +357,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
         }
         
         
-        if let playerChoice: NSData = NSKeyedArchiver.archivedData(withRootObject: playerOneReady) as NSData?{
+        if let playerChoice: NSData = NSKeyedArchiver.archivedData(withRootObject: playerOneReady) as NSData!{
             
             do{
                 try session.send(playerChoice as Data, toPeers: session.connectedPeers, with: .reliable)
@@ -378,7 +377,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     //Func that starts the round
-    func roundStart(){
+    @objc func roundStart(){
         
         //Set Player One's image
         switch playerOneChoice {
@@ -435,7 +434,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     //Func to start the count down
-    func countDown(){
+    @objc func countDown(){
         
         //when the counter hits 0 start the round
         if countdownSeconds == 0{
@@ -453,7 +452,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate, MCSessi
     }
     
     //Reset all var's to default
-    func resetAll(){
+    @objc func resetAll(){
         countdownSeconds = 3
         playerOneReady = false
         playerTwoReady = false
