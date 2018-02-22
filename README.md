@@ -7,6 +7,3 @@ As said before, this is a simple Rock, Paper, Scissor game that allows 2 devices
 Requirements: 
 This app requires 2 apple devices (IPhone or Tablet) to be connected via Internet or Bluetooth.
 
-Bugs:
-Has not been Updated for Swift 4
-
